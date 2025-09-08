@@ -19,7 +19,7 @@ spec:
   interval: 1m0s
   sourceRef:
     kind: GitRepository
-    name: nginx 
+    name: flux-system
   update:
-    path: ./cluster/home
-    strategy: Setters
+    path: ./clusters/home
+    strategy: Replace
