@@ -11,3 +11,18 @@ spec:
   secretRef:
     name: git-auth
   url: https://github.com/JscorpTech/kub.git
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: django 
+  namespace: jst 
+spec:
+  interval: 10m
+  sourceRef:
+    kind: GitRepository
+    name: django 
+  path: "./clusters/home"
+  prune: true
+  timeout: 1m
