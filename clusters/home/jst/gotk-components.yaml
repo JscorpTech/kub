@@ -6,22 +6,22 @@ apiVersion: v1
 kind: Namespace
 metadata:
   labels:
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
     pod-security.kubernetes.io/warn: restricted
     pod-security.kubernetes.io/warn-version: latest
-  name: flux-system
+  name: jst
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   labels:
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: allow-egress
-  namespace: flux-system
+  namespace: jst
 spec:
   egress:
   - {}
@@ -37,11 +37,11 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   labels:
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: allow-scraping
-  namespace: flux-system
+  namespace: jst
 spec:
   ingress:
   - from:
@@ -57,11 +57,11 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   labels:
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: allow-webhooks
-  namespace: flux-system
+  namespace: jst
 spec:
   ingress:
   - from:
@@ -76,11 +76,11 @@ apiVersion: v1
 kind: ResourceQuota
 metadata:
   labels:
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
-  name: critical-pods-flux-system
-  namespace: flux-system
+  name: critical-pods-jst
+  namespace: jst
 spec:
   hard:
     pods: "1000"
@@ -96,10 +96,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
-  name: crd-controller-flux-system
+  name: crd-controller-jst
 rules:
 - apiGroups:
   - source.toolkit.fluxcd.io
@@ -196,12 +196,12 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
-  name: flux-edit-flux-system
+  name: flux-edit-jst
 rules:
 - apiGroups:
   - notification.toolkit.fluxcd.io
@@ -222,13 +222,13 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   labels:
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
     rbac.authorization.k8s.io/aggregate-to-view: "true"
-  name: flux-view-flux-system
+  name: flux-view-jst
 rules:
 - apiGroups:
   - notification.toolkit.fluxcd.io
@@ -247,10 +247,10 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
-  name: cluster-reconciler-flux-system
+  name: cluster-reconciler-jst
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -258,42 +258,42 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kustomize-controller
-  namespace: flux-system
+  namespace: jst
 - kind: ServiceAccount
   name: helm-controller
-  namespace: flux-system
+  namespace: jst
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   labels:
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
-  name: crd-controller-flux-system
+  name: crd-controller-jst
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: crd-controller-flux-system
+  name: crd-controller-jst
 subjects:
 - kind: ServiceAccount
   name: kustomize-controller
-  namespace: flux-system
+  namespace: jst
 - kind: ServiceAccount
   name: helm-controller
-  namespace: flux-system
+  namespace: jst
 - kind: ServiceAccount
   name: source-controller
-  namespace: flux-system
+  namespace: jst
 - kind: ServiceAccount
   name: notification-controller
-  namespace: flux-system
+  namespace: jst
 - kind: ServiceAccount
   name: image-reflector-controller
-  namespace: flux-system
+  namespace: jst
 - kind: ServiceAccount
   name: image-automation-controller
-  namespace: flux-system
+  namespace: jst
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -302,7 +302,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.16.1
   labels:
     app.kubernetes.io/component: source-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: buckets.source.toolkit.fluxcd.io
@@ -1291,7 +1291,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.16.1
   labels:
     app.kubernetes.io/component: source-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: gitrepositories.source.toolkit.fluxcd.io
@@ -2569,7 +2569,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.16.1
   labels:
     app.kubernetes.io/component: source-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: helmcharts.source.toolkit.fluxcd.io
@@ -3550,7 +3550,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.16.1
   labels:
     app.kubernetes.io/component: source-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: helmrepositories.source.toolkit.fluxcd.io
@@ -4399,7 +4399,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.16.1
   labels:
     app.kubernetes.io/component: source-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: ocirepositories.source.toolkit.fluxcd.io
@@ -5223,23 +5223,23 @@ kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/component: source-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: source-controller
-  namespace: flux-system
+  namespace: jst
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     app.kubernetes.io/component: source-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
     control-plane: controller
   name: source-controller
-  namespace: flux-system
+  namespace: jst
 spec:
   ports:
   - name: http
@@ -5255,12 +5255,12 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/component: source-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
     control-plane: controller
   name: source-controller
-  namespace: flux-system
+  namespace: jst
 spec:
   replicas: 1
   selector:
@@ -5278,7 +5278,7 @@ spec:
     spec:
       containers:
       - args:
-        - --events-addr=http://notification-controller.flux-system.svc.cluster.local./
+        - --events-addr=http://notification-controller.jst.svc.cluster.local./
         - --watch-all-namespaces=true
         - --log-level=info
         - --log-encoding=json
@@ -5364,7 +5364,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.16.1
   labels:
     app.kubernetes.io/component: kustomize-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: kustomizations.kustomize.toolkit.fluxcd.io
@@ -7151,23 +7151,23 @@ kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/component: kustomize-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: kustomize-controller
-  namespace: flux-system
+  namespace: jst
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/component: kustomize-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
     control-plane: controller
   name: kustomize-controller
-  namespace: flux-system
+  namespace: jst
 spec:
   replicas: 1
   selector:
@@ -7183,7 +7183,7 @@ spec:
     spec:
       containers:
       - args:
-        - --events-addr=http://notification-controller.flux-system.svc.cluster.local./
+        - --events-addr=http://notification-controller.jst.svc.cluster.local./
         - --watch-all-namespaces=true
         - --log-level=info
         - --log-encoding=json
@@ -7258,7 +7258,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.16.1
   labels:
     app.kubernetes.io/component: helm-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: helmreleases.helm.toolkit.fluxcd.io
@@ -10953,23 +10953,23 @@ kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/component: helm-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: helm-controller
-  namespace: flux-system
+  namespace: jst
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/component: helm-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
     control-plane: controller
   name: helm-controller
-  namespace: flux-system
+  namespace: jst
 spec:
   replicas: 1
   selector:
@@ -10985,7 +10985,7 @@ spec:
     spec:
       containers:
       - args:
-        - --events-addr=http://notification-controller.flux-system.svc.cluster.local./
+        - --events-addr=http://notification-controller.jst.svc.cluster.local./
         - --watch-all-namespaces=true
         - --log-level=info
         - --log-encoding=json
@@ -11060,7 +11060,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.16.1
   labels:
     app.kubernetes.io/component: notification-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: alerts.notification.toolkit.fluxcd.io
@@ -11642,7 +11642,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.16.1
   labels:
     app.kubernetes.io/component: notification-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: providers.notification.toolkit.fluxcd.io
@@ -12203,7 +12203,7 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.16.1
   labels:
     app.kubernetes.io/component: notification-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: receivers.notification.toolkit.fluxcd.io
@@ -12885,23 +12885,23 @@ kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/component: notification-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
   name: notification-controller
-  namespace: flux-system
+  namespace: jst
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     app.kubernetes.io/component: notification-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
     control-plane: controller
   name: notification-controller
-  namespace: flux-system
+  namespace: jst
 spec:
   ports:
   - name: http
@@ -12917,12 +12917,12 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/component: notification-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
     control-plane: controller
   name: webhook-receiver
-  namespace: flux-system
+  namespace: jst
 spec:
   ports:
   - name: http
@@ -12938,12 +12938,12 @@ kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/component: notification-controller
-    app.kubernetes.io/instance: flux-system
+    app.kubernetes.io/instance: jst
     app.kubernetes.io/part-of: flux
     app.kubernetes.io/version: v2.6.4
     control-plane: controller
   name: notification-controller
-  namespace: flux-system
+  namespace: jst
 spec:
   replicas: 1
   selector:
