@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: jscorptech/test-nginx:1.0.2
+          image: jscorptech/test-nginx:1.0.2 # {"$imagepolicy": "flux-system:nginx"}
           ports:
             - containerPort: 80
           resources:
