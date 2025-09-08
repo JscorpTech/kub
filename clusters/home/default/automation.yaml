@@ -2,8 +2,8 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageUpdateAutomation
 metadata:
-  name: flux-system
-  namespace: flux-system
+  name: django
+  namespace: jst
 spec:
   git:
     checkout:
@@ -19,6 +19,6 @@ spec:
   interval: 1m0s
   sourceRef:
     kind: GitRepository
-    name: kub 
+    name: django 
   update:
     path: ./clusters/home

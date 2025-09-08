@@ -2,8 +2,8 @@
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageRepository
 metadata:
-  name: nginx 
-  namespace: flux-system
+  name: django 
+  namespace: jst
 spec:
   image: jscorptech/test-nginx
   interval: 1m0s

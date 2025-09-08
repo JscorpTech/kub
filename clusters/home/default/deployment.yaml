@@ -1,41 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
-  namespace: flux-system
+  name: django 
+  namespace: jst 
   labels:
-    app: nginx
+    app: django 
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: django 
   template:
     metadata:
       labels:
-        app: nginx
+        app: django 
     spec:
       containers:
-        - name: nginx
+        - name: django 
           image: jscorptech/test-nginx:1.0.4 # {"$imagepolicy": "flux-system:nginx"}
           ports:
             - containerPort: 80
-          resources:
-            limits:
-              cpu: "500m"
-              memory: "256Mi"
-            requests:
-              cpu: "250m"
-              memory: "128Mi"
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
-  namespace: flux-system
+  name: django 
+  namespace: jst 
 spec:
   selector:
-    app: nginx
+    app: django 
   type: ClusterIP
   ports:
     - protocol: TCP
