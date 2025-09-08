@@ -23,6 +23,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: django 
-  path: "./clusters/home"
+  path: "./clusters/home/default"
   prune: true
   timeout: 1m
