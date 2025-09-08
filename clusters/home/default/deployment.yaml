@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: django 
-          image: jscorptech/test-nginx:1.0.4 # {"$imagepolicy": "flux-system:nginx"}
+          image: jscorptech/test-nginx:1.0.4 # {"$imagepolicy": "jst:django"}
           ports:
             - containerPort: 80
 
